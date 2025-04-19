@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Objects</title>
+      
+    </head>
+    <body>
+        <script>
+            const book1={
+                title:'The Selection',
+                author:'Kiera Cass',
+                ISBN:'978-0007466696',
+                isBorrowed:false,
+
+                borrow(){
+                    this.isBorrowed=true; 
+                    return `The book borrowed:${this.title}`;
+
+                },
+                returnBook(){
+                    this.isBorrowed=false;
+                    return `The book returned:${this.title}`;
+                }
+            };
+
+            const book2 = {
+                title:'A Court of Thorns and Roses',
+                author:'Sarah J. Maas',
+                ISBN:'978-1526662224',
+                isBorrowed:false,
+
+                borrow(){
+                    this.isBorrowed=true;
+                },
+
+                returnBook(){
+                    this.isBorrowed=false;
+                }
+            };
+
+            const library={
+                books:[book1,book2],
+
+                addBook(book){
+                    this.books.push(book);
+                },
+
+                findBookByISBN(isbn){
+                    for (let book of this.books){
+                        if (book.ISBN === isbn){
+                            return book;
+                        }
+                    }
+                    return null;
+                },
+
+                listAvailableBooks() {
+                    this.books.forEach(book => {
+                        if (!book.isBorrowed){
+                            console.log(book.title);
+                        }
+                    });
+                },
+
+
+                listBorrowedBooks(){
+                    this.books.forEach(book => {
+                        if (book.isBorrowed){
+                            console.log(book.title);
+                        }
+                    });
+            
+                }
+
+            };
+            
+            console.log("All available books:");
+            library.listAvailableBooks(); 
+
+            console.log("Borrowing 'A Court of Thorns and Roses'...");
+            library.findBookByISBN('978-1526662224').borrow();
+
+            console.log("Available books after borrowing:");
+            library.listAvailableBooks();
+
+            console.log("Borrowed books:");
+            library.listBorrowedBooks(); 
+
+        </script>
+    
+    </body>
+</html>
